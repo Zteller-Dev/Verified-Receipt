@@ -5,11 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <title>Receipt | Zteller</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.png"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </head>
 
-<body class="sm:bg-gray-300">
-    <div class="w-full sm:w-[600px] sm:py-3 my-5 rounded-sm h-full sm:h-fit mx-auto bg-white">
+<body style="background-color: rgba(234, 246, 252, 0.95);">
+    <div id="receipt-content" class="w-full sm:w-[600px] sm:py-3 my-5 rounded-sm h-full sm:h-fit mx-auto bg-white">
         <header class="mx-2 mt-5 flex flex-row justify-between items-center">
             <div class="w-[80px] h-[80px]">
                 <img src="uniben-logo.png" />
@@ -38,8 +42,7 @@
         </div>
 
         <main class="mx-5 my-5 flex flex-col gap-3 justify-center items-center">
-            <div
-                class="py-3 w-[93%] h-[fit] sm:w-[500px] sm:h-[200px] rounded-lg bg-gray-300 text-black flex flex-row justify-between items-center">
+            <div class="py-3 w-[93%] h-[fit] sm:w-[500px] sm:h-[200px] rounded-lg bg-gray-100 text-black flex flex-row justify-between items-center">
                 <div class="h-full flex flex-col gap-[1px] ml-4 justify-center text-[12px]">
                     <p class="border-2 w-fit px-2 my-2 border-blue-400 rounded-[50px]">Student Information</p>
                     <p>
@@ -67,11 +70,9 @@
                         08072689364
                     </p>
                 </div>
-
             </div>
 
-            <div
-                class="w-[93%] h-fit py-3 sm:w-[500px] sm:h-[200px] rounded-lg bg-gray-300 text-black flex flex-row justify-between">
+            <div class="w-[93%] h-fit py-3 sm:w-[500px] sm:h-[200px] rounded-lg bg-gray-100 text-black flex flex-row justify-between">
                 <div class="h-full flex flex-col gap-[1px] ml-4 justify-center text-[12px]">
                     <p class="border-2 w-fit px-2 my-2 border-blue-400 rounded-[50px]">Payment Details</p>
                     <p>
@@ -104,7 +105,7 @@
                     </p>
                 </div>
                 <div class="text-[12px] text-center h-fit flex flex-col items-center my-auto mx-auto mr-6">
-                    <img src="qrcode.png" class="w-[100px] h-[100px] " />
+                    <img src="qrcode.png" class="w-[100px] h-[100px]" />
                     <p>SCAN ME!</p>
                     <p>to validate payment ID</p>
                 </div>
@@ -112,8 +113,7 @@
         </main>
 
         <footer class="mx-5">
-            <div
-                class="mt-2 font-bold mb-8 flex w-[80%] sm:w-[40%] mx-auto gap-3 flex-row items-center justify-between">
+            <div class="mt-2 font-bold mb-8 flex w-[80%] sm:w-[40%] mx-auto gap-3 flex-row items-center justify-between">
                 <span class="border-blue-400 border-2 px-2 rounded-[50px]">TOTAL</span>
                 <div class="border-2 border-black w-2/3 h-[1px]"></div>
                 <p>N2,600.00</p>
@@ -124,6 +124,47 @@
             </div>
         </footer>
     </div>
+    <p id="status-message" class="mt-2 text-center text-red-600"></p>
+    <div class="text-center mt-10">
+        <button id="download-button" class="text-lg px-6 py-3 bg-green-700 text-white border-2 border-green-700 rounded-[50px] hover:bg-green-500">
+            Download Receipt
+        </button>
+        
+    </div>
+
+    <script>
+        async function downloadReceipt() {
+            const button = document.getElementById('download-button');
+            const statusMessage = document.getElementById('status-message');
+
+            button.disabled = true;
+            statusMessage.textContent = 'Downloading...';
+
+            try {
+                const { jsPDF } = window.jspdf;
+                const elementHTML = document.getElementById('receipt-content');
+                const canvas = await html2canvas(elementHTML);
+                const imgData = canvas.toDataURL('image/png');
+
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgProps = pdf.getImageProperties(imgData);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save('receipt.pdf');
+
+                statusMessage.textContent = 'Download successful!';
+            } catch (error) {
+                console.error('Error downloading receipt:', error);
+                statusMessage.textContent = 'Error downloading receipt.';
+            } finally {
+                button.disabled = false;
+            }
+        }
+
+        document.getElementById('download-button').addEventListener('click', downloadReceipt);
+    </script>
 </body>
 
 </html>
