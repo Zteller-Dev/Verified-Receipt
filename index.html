@@ -5,16 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Receipt | Zteller</title>
-    <link rel="shortcut icon" type="image/x-icon" href="./favicon.png"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <title>Document</title>
 
 </head>
 
-<body style="background-color: rgba(234, 246, 252, 0.95);">
-    <div id="receipt-content" class="w-full sm:w-[600px] sm:py-3 my-5 rounded-sm h-full sm:h-fit mx-auto bg-white">
-        <header class="mx-2 mt-5 flex flex-row justify-between items-center">
+<body class="sm:bg-gray-300">
+    <div class="w-full sm:w-[620px] sm:py-3 my-5 rounded-sm h-full sm:h-fit mx-auto bg-white rounded-[200px] relative">
+        <header class="mx-5 mt-5 flex flex-row justify-between items-center">
             <div class="w-[80px] h-[80px]">
                 <img src="uniben-logo.png" />
             </div>
@@ -28,23 +25,27 @@
             </div>
         </header>
 
-        <div class="mx-5 mt-5 border-b-4 flex flex-row justify-between border-blue-400 px-3 ">
-            <p>Payment Receipt</p>
-            <p>Department Dues</p>
+        <div class="mx-5 mt-5 px-3 ">
+            <div class="flex flex-row justify-between font-bold text-xl">
+                <p>Payment Receipt</p>
+                <p>Department Dues</p>
+            </div>
+            <img src="REceipt Gradient Line .png">
         </div>
 
-        <div class="text-[12px] text-center mt-2">
-            <p>Payment ID: 21973726xcd</p>
+        <div class="text-[12px] text-center mt-2 font-mono">
+            <p class="font-bold">Payment ID: 21973726xcd</p>
             <p>Visit
                 <a href="zzz.zteller.com">www.zteller.com/paymentid</a>
                 to validate payment ID
             </p>
         </div>
 
-        <main class="mx-5 my-5 flex flex-col gap-3 justify-center items-center">
-            <div class="py-3 w-[93%] h-[fit] sm:w-[500px] sm:h-[200px] rounded-lg bg-gray-100 text-black flex flex-row justify-between items-center">
+        <main class="mx-5 my-5 flex flex-col gap-3 justify-center items-center font-mono">
+            <div
+                class="py-3 w-[93%] h-[fit] sm:w-[500px] sm:h-[200px] rounded-lg bg-gray-300 text-black flex flex-row justify-between items-center">
                 <div class="h-full flex flex-col gap-[1px] ml-4 justify-center text-[12px]">
-                    <p class="border-2 w-fit px-2 my-2 border-blue-400 rounded-[50px]">Student Information</p>
+                    <img class="w-[170px] my-2" src="REceipt Student Information.png">
                     <p>
                         <span class="font-bold">Name:</span>
                         Martin Luther King
@@ -65,19 +66,28 @@
                         <span class="font-bold">Mat No:</span>
                         BVG9839
                     </p>
+                    <p>
+                        <span class="font-bold">Entry Mode: </span>
+                        Full-Time
+                    </p>
                     <p class="font-bold">
                         <span>Phone Number:</span>
                         08072689364
                     </p>
                 </div>
+
             </div>
 
-            <div class="w-[93%] h-fit py-3 sm:w-[500px] sm:h-[200px] rounded-lg bg-gray-100 text-black flex flex-row justify-between">
-                <div class="h-full flex flex-col gap-[1px] ml-4 justify-center text-[12px]">
-                    <p class="border-2 w-fit px-2 my-2 border-blue-400 rounded-[50px]">Payment Details</p>
+            <div
+                class="w-[93%] h-fit py-5 sm:w-[500px] sm:h-[200px] rounded-lg bg-gray-300 text-black flex flex-row justify-between relative z-[2]">
+                <div class="h-full flex flex-col gap-[1px] ml-4 justify-center text-[12px] pb-5">
+                    <img class="w-[150px] my-2" src="REceipt Payment Information.png">
                     <p>
                         <span class="font-bold">Payment Date:</span>
                         13th October 2025
+                    </p>
+                    <p>
+                        <span class="font-bold">Payment Time: </span> 06:48pm
                     </p>
                     <p>
                         <span class="font-bold">Payment ID:</span>
@@ -105,16 +115,17 @@
                     </p>
                 </div>
                 <div class="text-[12px] text-center h-fit flex flex-col items-center my-auto mx-auto mr-6">
-                    <img src="qrcode.png" class="w-[100px] h-[100px]" />
+                    <img src="qrcode.png" class="w-[100px] h-[100px] " />
                     <p>SCAN ME!</p>
                     <p>to validate payment ID</p>
                 </div>
             </div>
         </main>
 
-        <footer class="mx-5">
-            <div class="mt-2 font-bold mb-8 flex w-[80%] sm:w-[40%] mx-auto gap-3 flex-row items-center justify-between">
-                <span class="border-blue-400 border-2 px-2 rounded-[50px]">TOTAL</span>
+        <footer class="mx-5 relative z-[2]">
+            <div
+                class="mt-2 font-bold mb-8 flex w-[80%] sm:w-[40%] mx-auto gap-3 flex-row items-center justify-between">
+                <img class="w-[70px] relative z-[2]" src="REceipt Total.png">
                 <div class="border-2 border-black w-2/3 h-[1px]"></div>
                 <p>N2,600.00</p>
             </div>
@@ -123,48 +134,11 @@
                 <img src="Ztellalogo (1).png" class="w-[50px]">
             </div>
         </footer>
+
+        <div class="absolute bottom-0 left-0 flex items-end justify-start z-[1]">
+            <img src="REceipt Backround Swirl.png" alt="Background design" class="h-[400px] w-[370px] bottom-[-20px]">
+        </div>
     </div>
-    <p id="status-message" class="mt-2 text-center text-red-600"></p>
-    <div class="text-center mt-10">
-        <button id="download-button" class="text-lg px-6 py-3 bg-green-700 text-white border-2 border-green-700 rounded-[50px] hover:bg-green-500">
-            Download Receipt
-        </button>
-        
-    </div>
-
-    <script>
-        async function downloadReceipt() {
-            const button = document.getElementById('download-button');
-            const statusMessage = document.getElementById('status-message');
-
-            button.disabled = true;
-            statusMessage.textContent = 'Downloading...';
-
-            try {
-                const { jsPDF } = window.jspdf;
-                const elementHTML = document.getElementById('receipt-content');
-                const canvas = await html2canvas(elementHTML);
-                const imgData = canvas.toDataURL('image/png');
-
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                const imgProps = pdf.getImageProperties(imgData);
-                const pdfWidth = pdf.internal.pageSize.getWidth();
-                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                pdf.save('receipt.pdf');
-
-                statusMessage.textContent = 'Download successful!';
-            } catch (error) {
-                console.error('Error downloading receipt:', error);
-                statusMessage.textContent = 'Error downloading receipt.';
-            } finally {
-                button.disabled = false;
-            }
-        }
-
-        document.getElementById('download-button').addEventListener('click', downloadReceipt);
-    </script>
 </body>
 
 </html>

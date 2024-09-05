@@ -1,1 +1,1 @@
-# Verified-Receipt
+Verified Receipt
